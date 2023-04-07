@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<script src="js/mui.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<style type="text/css">
+			html,
+			body {
+				width: 100%;
+			}
+
+			.mui-content,
+			video,
+			.video-js {
+				width: 100vw;
+				height: auto;
+				min-height: 50vw;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="css/video-js.min.css">
+		<script type="text/javascript" src="js/video.min.js"></script>
+
+		<div class="mui-content">
+			<video id="video" controls="true" autoplay preload="auto"
+				class="video-js vjs-default-skin vjs-big-play-centered" poster="">
+			</video>
+		</div>
+	</body>
+
+</html>
+
+<script type="text/javascript">
+	try {
+		let m3u8 = window.location.href.split('?')[1].split('=')[1];
+		let source = "<source src='" + m3u8 + "' type='application/x-mpegURL' id='target' />";
+		document.querySelector("video").innerHTML = source;
+	} catch {}
+
+	var player = videojs('video', {
+		"poster": "",
+		"controls": true
+	}, function() {
+		this.on('play', function() {
+			mui.toast('视频正在播放');
+		});
+		//暂停--播放完毕后也会暂停
+		this.on('pause', function() {
+			mui.toast("视频已经暂停");
+		});
+		// 结束
+		this.on('ended', function() {
+			mui.toast('视频播放完毕');
+		})
+	});
+</script>
