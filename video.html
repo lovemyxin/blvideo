@@ -2,7 +2,7 @@
 <html>
 
 	<head>
-		<meta charset="utf-8">
+		<meta http-equiv=Content-Type content="text/html; charset=utf-8">
 		<title></title>
 		<meta name="viewport"
 			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
@@ -18,14 +18,14 @@
 			html,
 			body {
 				width: 100%;
+				height: 100%;
 			}
 
 			.mui-content,
 			video,
 			.video-js {
 				width: 100vw;
-				height: auto;
-				min-height: 50vw;
+				height: 49.85vw;
 			}
 		</style>
 		<link rel="stylesheet" type="text/css" href="css/video-js.min.css">
@@ -33,7 +33,9 @@
 
 		<div class="mui-content">
 			<video id="video" controls="true" autoplay preload="auto"
-				class="video-js vjs-default-skin vjs-big-play-centered" poster="">
+				class="video-js vjs-default-skin vjs-big-play-centered" poster="" data-setup="{}"
+				webkit-playsinline='true' playsinline='true' x-webkit-airplay='true' x5-video-player-type='h5'
+				x5-video-player-fullscreen='true' x5-video-ignore-metadata='true'>
 			</video>
 		</div>
 	</body>
@@ -42,9 +44,12 @@
 
 <script type="text/javascript">
 	try {
-		let m3u8 = window.location.href.split('?')[1].split('=')[1];
+		let params = window.location.href.split('?')[1].split('&');
+		let m3u8 = params[0].split('=')[1];
 		let source = "<source src='" + m3u8 + "' type='application/x-mpegURL' id='target' />";
+		let title = params[1].split('=')[1];
 		document.querySelector("video").innerHTML = source;
+		document.title = window.decodeURIComponent(title);
 	} catch {}
 
 	var player = videojs('video', {
