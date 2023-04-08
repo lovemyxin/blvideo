@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<script>
-			var h5pullDown = true;
-		</script>
-		<meta charset="utf-8">
+		<meta http-equiv=Content-Type content="text/html; charset=utf-8">
 		<meta name="viewport"
 			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title></title>
@@ -109,7 +106,8 @@
 
 		methods: {
 			play(video) {
-				window.open(`video.html?m3u8=${video.m3u8}`, "_blank");
+				window.open(`video.html?m3u8=${video.m3u8}&title=${window.encodeURIComponent(video.title)}`,
+					"_blank");
 			},
 
 			style(video) {
